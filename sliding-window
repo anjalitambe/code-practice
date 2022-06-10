@@ -1,0 +1,49 @@
+# find the average of all subarrays of ‘5’ contiguous elements in the given array
+
+# sub optimal solution
+# complexity: O(N*K)
+
+def average_finder():
+    k = 5
+    numbers =  [1, 3, 2, 6, -1, 4, 1, 8, 2]
+    result = []
+    
+    for i in range(len(numbers)-k+1):
+        sum = 0
+        for j in range(i,i+k):
+            sum = sum + numbers[j]
+        
+        result.append(sum/k)
+        
+    return result
+
+# sub optimal solution
+# complexity: O(N)
+def average_finder_optimal():
+    k = 5
+    numbers =  [1, 3, 2, 6, -1, 4, 1, 8, 2]
+    result = []
+    sum = 0
+    windowStart = 0
+    
+    for windowEnd in range(len(numbers)):
+        sum = sum + numbers[windowEnd]
+        if(windowEnd >= k-1):
+            result.append(sum/k)
+            sum = sum - numbers[windowStart]
+            windowStart = windowStart + 1
+            
+            
+    return result
+    
+print(str(average_finder()))
+   
+print("Sub optimal solution")
+print(str(average_finder()))
+
+print("With slinding window technique")
+print(str(average_finder_optimal()))
+
+
+
+
